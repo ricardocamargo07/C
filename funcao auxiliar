@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int fatorial(int n) {
+	int result;
+	
+	result = 1;
+	
+	for (; n; n--) {
+		//result = result * n;
+		result *= n;
+	}
+	
+	return result;
+}
+
+
+int main(void) {
+	int numero;
+	int resultado;
+
+	printf("Entre com um numero nao negativo: \n");
+	scanf("%d", &numero);
+
+	resultado = fatorial(numero);
+	
+	printf("O fatorial de %d e igual a %d\n", numero, resultado);
+	printf("O fatorial de %d e igual a %d\n", numero, fatorial(numero));
+	
+	return 0;
+
+}
