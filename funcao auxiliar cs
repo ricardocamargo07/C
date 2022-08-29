@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+
+float opcaoA(float p, float i, int p) {
+	re
+
+int main(void) {
+	char opcao;
+	float i;
+	int n;
+	float p;
+	float resultado;
+
+	printf("Entre com a opcao que vc quer: \n");
+	scanf("%c", &opcao);
+
+	printf("Entre com a taxa: \n");
+	scanf("%d", &i);
+
+	printf("Entre com o periodo: \n");
+	scanf("%d", &n);
+
+	if (opcao == 'A') {
+		printf("Entre com o principal inicial: \n");
+		scanf("%d", &p);
+		resultado = opcaoA(p, i, n);
+		printf("O valor do Montante Final: %d\n",resultado);
+	}
+	
+	return 0;
+
+}
