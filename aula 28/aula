@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void stringCopy(char* pDest, char* pOrigem);
+
+int main(void) {
+	char n[100];
+	char* p;
+
+	p = (char *)malloc(37); //aloca 37 bytes tem que ser maior que 6 "Maria\0" 012345
+	if (p == NULL) {
+		fprintf(stderr, "Nao foi possivel alocar a memoria");
+		exit(0x87967869);
+	}
+	stringCopy(n, "Ana");
+	printf("Agora n tem %s.\n", n);
+
+	stringCopy(p, "Maria");
+	printf("Agora p tem %s.\n", p);
+
+	free(p);
+	return 0;
+}
+
+void stringCopy(char* pDest, char* pOrigem) {
+	*pDest = *pOrigem;
+	if (*pDest == '\0') return;
+	pDest++;
+	pOrigem++;
+	stringCopy(pDest, pOrigem);
+	printf("Voltando...\n");
+}
