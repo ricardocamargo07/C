@@ -1,0 +1,109 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+
+unsigned long long** cria2D(int linha, int coluna);
+void print2D(unsigned long long** matriz, int linha, int coluna);
+void mult1(unsigned long long** matrizA, unsigned long long** matrizB, unsigned long long** matrizC, int n, int m, int w);
+void mult2(unsigned long long** matrizA, unsigned long long** matrizB, unsigned long long** matrizC, int n, int m, int w);
+void libera2D(unsigned long long** matriz, int linha);
+
+
+int main(void) {
+	unsigned long long** matrizA;
+	unsigned long long** matrizB;
+	unsigned long long** matrizC;
+
+	matrizA = cria2D(2, 3);
+	matrizB = cria2D(3, 2);
+
+
+	print2D(matrizA, 2, 3);
+	printf("-------------------\n");
+	print2D(matrizB, 3, 2);
+	printf("-------------------\n");
+	mult1(matrizA,matrizB, matrizC, 2, 2, int w);
+	return 0;
+}
+
+unsigned long long** cria2D(int linha, int coluna) 
+{
+	unsigned long long** matriz;
+	int num = 1;
+	int i, j;
+
+	matriz = (unsigned long long**)malloc(linha * sizeof(unsigned long long*));
+
+	if (!matriz) {
+
+		fprintf(stderr, "Erro de alocacao de memoria");
+		return NULL;
+	}
+
+	for (i = 0; i < linha; i++) 
+	{
+		matriz[i] = (unsigned long long*)malloc(coluna * sizeof(unsigned long long));
+		if (!matriz[i]) {
+
+			fprintf(stderr, "Erro de alocacao de memoria");
+			return NULL;
+		}
+	}
+	for (i = 0; i < linha; i++) {
+		for (j = 0; j < coluna; j++) {
+			matriz[i][j] = num;
+			num++;
+		}
+	}
+
+
+	return matriz;
+
+}
+
+
+void print2D(unsigned long long** matriz, int linha, int coluna) {
+	
+	for (int i = 0; i < linha; i++) {
+		for (int j = 0; j < coluna; j++) {
+			printf("%5d ", matriz[i][j]);
+		}
+		putchar('\n');
+	}
+}
+
+
+void mult1(unsigned long long** matrizA, unsigned long long** matrizB, unsigned long long** matrizC, int linha, int coluna, int tamanho) {
+	int i, j,k;
+	int num = 1;
+
+	for (i = 0; i < linha; i++) {
+		for (j = 0; j < coluna; j++) {
+			matrizC = 0;
+			for (k = 0; k < linha; k++) {
+				matrizC = matrizC[i][j] + matrizA[i][k] * matrizB[k][j];
+			}
+		}
+	}
+}
+
+
+void mult2(unsigned long long** matrizA, unsigned long long** matrizB, unsigned long long** matrizC, int linha, int coluna, int tamanho) {
+	int i, j, k;
+	int num = 1;
+
+	for (i = 0; i < linha; i++) {
+		for (j = 0; j < linha; j++) {
+			matrizC = 0;
+			for (k = 0; k < linha; k++) {
+				matrizC = matrizC[i][j] + matrizA[i][k] * matrizB[k][j];
+			}
+		}
+	}
+}
+
+void libera2D(unsigned long long** matriz, int linha) {
+	
+	free(matriz);
+}
