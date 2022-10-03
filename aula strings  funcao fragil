@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+void leString(char* p);
+
+int main(void) {
+	char n[100];
+	char nomes[40][88];
+	char* p;
+
+
+	printf("Entre com outro nome: ");
+	leString(nomes[1]);
+	printf("new %s \n", nomes[1]);
+
+	printf("Entre com o nome dos alunos: \n");
+	for (int i = 0; i < 4; i++) {
+		printf("Entre com o nome %d : \n",i);
+		leString(nomes[i]);
+
+	}
+
+	printf("Alunos da turma: \n");
+	for (int i = 0; i < 4; i++) {
+		printf(nomes[i]);
+	}
+
+
+	return 0;
+}
+
+
+void leString(char* p) {
+	char ch;
+
+	while ((ch = getchar()) != '\n' ){
+		*p = ch;
+		p++;
+	}
+	*p = '\0';
+	
+	return;
+
+}
+
