@@ -1,31 +1,43 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
 
-#define PI ((float)3.14)
+#define TAMANHO_NOME 100
 
+int main(void) {
+	FILE* pArq;
+	char* nome;
+	char* p;
+	int i = 1;
 
-void cone(float r, float h, float* area, float* volume);
+	pArq = fopen("C:/Users/e1713112/Desktop/Nomes.txt","r");
 
-int main(void)
-{
-	float area, volume;
-	float r, h;
+	printf("Programa iniciando.\n");
 	
-	printf("Entre com o raio: \n");
-	scanf("%f",&r);
+	if (!pArq) {
+		fprintf(stderr, "Erro ao tentar abrir o arquivo.\n");
+		return -1;
+	}
 
-	printf("Entre com a altura: \n");
-	scanf("%f", &h);
+	nome = (char *)malloc(TAMANHO_NOME * sizeof(char));
 
-	cone(r, h, &area, &volume);
-	printf("Area=%f Volume=%f\n", area, volume);
+	if (!nome) {
+		fprintf(stderr, "Erro de alocacao de memoria.\n");
+		return -2;
+	}
+
+	//Ordem normal.
+	while (fgets(nome, TAMANHO_NOME, pArq) != NULL) {
+		printf("%d - Nome: %s\n", i,nome);
+		i++;
+		fgets(nome, TAMANHO_NOME, pArq);
+
+	}
+
+	//Ordem ao contrario.
+	
+
+	fclose(pArq);
+	free(nome);
+	
 	return 0;
-}
-
-void cone(float r, float h, float* area, float* volume)
-{
-	float s = sqrtf(r * r + h * h); 
-	*area = PI * r * (r + s);
-	*volume = (PI * r * r * h) / 3;
 }
