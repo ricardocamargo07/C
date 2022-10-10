@@ -1,0 +1,53 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TAMANHO_NOME 130
+
+void inverteArquivo(FILE* pArq);
+
+int main(void) {
+	FILE* pArq;
+	int i = 1;
+
+	pArq = fopen("C:/Users/e1713112/Desktop/Nomes.txt","r");
+
+	printf("Programa iniciando.\n");
+	
+	if (!pArq) {
+		fprintf(stderr, "Erro ao tentar abrir o arquivo.\n");
+		return -1;
+	}
+
+	//Ordem ao contrario.
+	inverteArquivo(pArq);
+
+	fclose(pArq);
+	
+	return 0;
+}
+
+void inverteArquivo(FILE* pArq) {
+	
+	char* pNome;
+	pNome = (char*)malloc(TAMANHO_NOME * sizeof(char));
+
+	if (!pNome) {
+		fprintf(stderr, "Erro de alocacao de memoria.\n");
+		//exit(-2);
+		return;
+	}
+
+	
+	if (fgets(pNome, TAMANHO_NOME, pArq) == NULL) {
+		// caso base
+	}
+	else {
+		// caso recursivo
+		inverteArquivo(pArq);
+		printf("==> %s\n",pNome);
+	}
+	
+	
+	free(pNome);
+}
